@@ -18,5 +18,5 @@ app.get("/", (req: express.Request, res: express.Response) =>
 );
 
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Servidor ouvindo em https://localhost:${PORT}`);
+  console.log(`⚡️[server]: Server listening in https://localhost:${PORT}`);
 });
