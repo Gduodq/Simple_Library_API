@@ -11,6 +11,8 @@ const defaultSchema = validator.compile({
   author: "string",
   price: { type: "number", min: 0 },
   registerDate: "date",
+  isDeleted: "boolean",
+  deletedAt: { type: "date", optional },
   $$strict,
 });
 

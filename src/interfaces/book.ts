@@ -1,7 +1,9 @@
 export interface Book {
-  id: string;
+  _id: string;
   name: string;
   author: string;
   price: number;
   registerDate: Date;
+  isDeleted: Boolean;
+  deletedAt?: Date;
 }

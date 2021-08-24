@@ -1,19 +1,23 @@
 import { Route } from "../interfaces/route";
 import { acceptedMethods } from "../enums/acceptedMethods";
-import db from "../database";
+import { collections } from "../enums/collections";
+import getDb from "../database";
 
 export const deleteBook: Route = {
   path: "/books/:bookId",
   method: acceptedMethods.delete,
-  handleRoute: (req, res) => {
+  handleRoute: async (req, res) => {
     const { params } = req;
     const { bookId } = params;
-    const indexFound = db.findIndex((book) => book.id === bookId);
-    if (indexFound === -1) res.status(404).send("Book not found :(");
-    else {
-      const book = db[indexFound];
-      db.splice(indexFound, 1);
-      res.status(200).send(book);
-    }
+    const db = await getDb();
+    const operationResult = await db
+      .collection(collections.books)
+      .findOneAndUpdate(
+        { _id: bookId, isDeleted: false },
+        { $set: { isDeleted: true, deletedAt: new Date().toISOString() } },
+        { returnDocument: "after" }
+      );
+    if (!operationResult.ok) res.status(404).send("Book not found :(");
+    else res.status(200).send(operationResult.value);
   },
 };
