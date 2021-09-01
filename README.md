@@ -8,7 +8,7 @@ This API is built with [TypeScript](https://www.typescriptlang.org), [Express](h
 
 This API have persistent database. To use it it's necessary to have [MongoDB](www.mongodb.com/) installed in your development enviroment. To configure the access check the [Enviroment Variables](#EnviromentVariables) section.
 
-The API is built based on the microservices architecture, so it's necessary to have [RabbitMQ](https://www.rabbitmq.com) installed in your development enviroment. (The project).To configure the access check the [Enviroment Variables](#EnviromentVariables) section.
+The API is built based on the microservices architecture, so, it's necessary to have [RabbitMQ](https://www.rabbitmq.com) installed in your development enviroment. (The project).To configure the access check the [Enviroment Variables](#EnviromentVariables) section.
 
 To run it, make sure to install all dependencies first:
 
@@ -24,7 +24,7 @@ The API will listen by default on [http://localhost:8000](http://localhost:8000)
 
 The [Payment_Microservice](https://github.com/Gduodq/Payment_Microservice) is been built and for now will log every message that reaches the `req_payment` queue on [RabbitMQ](https://www.rabbitmq.com). To test it you can check it's repository https://github.com/Gduodq/Payment_Microservice.
 
-The `/purchase` endpoint can trigger a message. With the method `POST` and the message body below the endpoint must send a message to the queue and the [Payment_Microservice](https://github.com/Gduodq/Payment_Microservice) should log a message.
+The `/purchase` endpoint can trigger a message. With the method `POST` and the message body below, the endpoint must send a message to the queue and the [Payment_Microservice](https://github.com/Gduodq/Payment_Microservice) should log a message.
 
 `[
 	{
