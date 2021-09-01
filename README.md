@@ -24,6 +24,16 @@ The API will listen by default on [http://localhost:8000](http://localhost:8000)
 
 The [Payment_Microservice](https://github.com/Gduodq/Payment_Microservice) is been built and for now will log every message that reaches the `req_payment` queue on [RabbitMQ](https://www.rabbitmq.com). To test it you can check it's repository https://github.com/Gduodq/Payment_Microservice.
 
+The `/purchase` endpoint can trigger a message. With the method `POST` and the message body above the endpoint must send a message to the queue and the [Payment_Microservice](https://github.com/Gduodq/Payment_Microservice) should log a message.
+
+`[
+	{
+	"bookId":"d4e5f81d-d91a-49e4-a899-612699e1c546",
+	"quantity":3,
+	"sellerCode":""
+	}
+]`
+
 ## <a name="EnviromentVariables"></a>Enviroment Variables
 
 - PORT:
