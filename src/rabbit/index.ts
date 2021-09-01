@@ -1,16 +1,20 @@
-import amqp from "amqplib/callback_api";
+import RabbitMQ from "./RabbitMQ";
+import { initialQueues } from "./initialQueues";
 
-export const initializeBroker = () => {
-  amqp.connect(
-    "amqp://guest:guest@localhost:5672",
-    function (errConn, connection: amqp.Connection) {
-      if (errConn) throw errConn;
-      connection.createChannel(function (errChan, channel: amqp.Channel) {
-        if (errChan) throw errChan;
-        const queue = "req_payment";
-        channel.assertQueue(queue, { durable: false });
-        console.log(`[Broker] Server sending on queue: ${queue}`);
-      });
-    }
-  );
+const rabbitUsername = process.env.BROKER_USERNAME || "";
+const rabbitPassword = process.env.BROKER_PASSWORD || "";
+const rabbitAuthUrl =
+  rabbitUsername || rabbitPassword
+    ? `${rabbitUsername}:${rabbitPassword}@`
+    : "";
+const rabbitHost = process.env.BROKER_HOST || "localhost";
+const rabbitPort = process.env.BROKER_PORT || "5672";
+const rabbitUrl = `amqp://${rabbitAuthUrl}${rabbitHost}:${rabbitPort}`;
+
+const Broker = new RabbitMQ(rabbitUrl, initialQueues);
+
+export const initializeBroker = async () => {
+  await Broker.start();
 };
+
+export default Broker;

@@ -3,6 +3,7 @@ import { getBook } from "./getBook";
 import { createBook } from "./createBook";
 import { updateBook } from "./updateBook";
 import { deleteBook } from "./deleteBook";
+import { purchase } from "./purchase";
 import { Route } from "../interfaces/route";
 
 export const routes: Route[] = [
@@ -11,4 +12,5 @@ export const routes: Route[] = [
   createBook,
   updateBook,
   deleteBook,
+  purchase,
 ];

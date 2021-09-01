@@ -5,7 +5,7 @@ export const initialDatabase: InitializeDB[] = [
     collectionName: "books",
     instances: [
       {
-        _id: "8h65f81d-d91a-49e4-a899-612699e1834",
+        _id: "8h65f81d-d91a-49e4-a899-612699e18347",
         name: "Harry Potter",
         author: "J. K. Rowling",
         price: 10.0,

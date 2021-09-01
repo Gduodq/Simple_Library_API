@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { routes } from "./routes";
+import log from "npmlog";
 
 export const main = () => {
   const app = express();
@@ -17,6 +18,6 @@ export const main = () => {
   );
 
   app.listen(PORT, () => {
-    console.log(`⚡️[server]: Servidor ouvindo em https://localhost:${PORT}`);
+    log.info("", `⚡️[server]: Servidor ouvindo em https://localhost:${PORT}`);
   });
 };

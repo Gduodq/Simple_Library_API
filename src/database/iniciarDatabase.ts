@@ -1,15 +1,16 @@
 import { Db, Document } from "mongodb";
 import { initialDatabase } from "./initialDatabase";
 import { InitializeDB } from "../interfaces/initializeDB";
+import log from "npmlog";
 
-export const initializeDB = async (getDb: Function) => {
+export const initializeDB = async (getDb: () => Promise<Db>) => {
   const libraryDb = await getDb();
   try {
     for (let collection of initialDatabase)
       await iniciarCollection(libraryDb, collection);
     return libraryDb;
   } catch (e) {
-    console.error(e);
+    log.error("", e);
   }
 };
 
@@ -25,13 +26,14 @@ const iniciarCollection = async (libraryDb: Db, collection: InitializeDB) => {
         await collectionConnection.insertOne(newDocument);
       } catch (e) {
         if (e.code === 11000)
-          console.log(
+          log.silly(
+            "",
             `Instance ${instances[index].name} (${instances[index]._id}) already exists in db, skipping creation...`
           );
-        else console.log(e);
+        else log.error("", e);
       }
     }
   } catch (e) {
-    console.log(e);
+    log.error("", e);
   }
 };
